@@ -10,6 +10,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+
 @Entity
 @Table(name = "SYS_TREE_DEFINITION")
 public class TreeDefinition implements Serializable{
@@ -22,14 +23,14 @@ public class TreeDefinition implements Serializable{
 	@Column(name="ROW_ID")
 	private String id;
 	
-	@Column(name="TREE_ID")
-	private String treeId;
+	@Column(name="NAME")
+	private String name;
 	
-	@Column(name="GROUP_ID")//参与这个树的维度
-	private String groupId;
+	@Column(name="REMARK")
+	private String remark;
 	
-	@Column(name="LEAF_FLAG")
-	private String leafFlag;
+	@Column(name="single_FLAG")
+	private String singleFlag;//是否单个实体组成的树
 
 	public String getId() {
 		return id;
@@ -39,28 +40,28 @@ public class TreeDefinition implements Serializable{
 		this.id = id;
 	}
 
-	public String getTreeId() {
-		return treeId;
+	public String getName() {
+		return name;
 	}
 
-	public void setTreeId(String treeId) {
-		this.treeId = treeId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getGroupId() {
-		return groupId;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
-	public String getLeafFlag() {
-		return leafFlag;
+	public String getSingleFlag() {
+		return singleFlag;
 	}
 
-	public void setLeafFlag(String leafFlag) {
-		this.leafFlag = leafFlag;
+	public void setSingleFlag(String singleFlag) {
+		this.singleFlag = singleFlag;
 	}
 	
 }

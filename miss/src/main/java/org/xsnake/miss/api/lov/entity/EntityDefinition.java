@@ -9,23 +9,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.util.StringUtils;
+import org.xsnake.miss.exception.MissException;
 
 @Entity
-@Table(name = "SYS_LOV_GROUP")
-public class LovGroup implements Serializable {
-
+@Table(name = "SYS_ENTITY_DEFINITION")
+public class EntityDefinition implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator = "SYS_LOV_GROUP_ID_GENERATOR")
-	@GenericGenerator(name="SYS_LOV_GROUP_ID_GENERATOR", strategy="assigned")
-	@Column(name="ROW_ID")
+	@GeneratedValue(generator = "SYS_ENTITY_DEFINITION_ID_GENERATOR")
+	@GenericGenerator(name="SYS_ENTITY_DEFINITION_ID_GENERATOR", strategy="assigned")
+	@Column(name="ROW_ID",length=50,nullable = false)
 	private String id;
 	
-	@Column(name="NAME")
+	@Column(name="NAME",length=50,nullable = false)
 	private String name;
 	
-	@Column(name="REMARK")
+	@Column(name="REMARK",length=500)
 	private String remark;
 	
 	@Column(name="STATUS")
@@ -34,14 +36,29 @@ public class LovGroup implements Serializable {
 	@Column(name="SYSTEM_FLAG")
 	private String systemFlag;
 	
-	@Column(name="TREE_FLAG")
-	private String treeFlag;
-
-	@Column(name="TABLE_FLAG")
-	private String tableFlag;
-	
 	@Column(name="SORT_NO")
 	private Integer sortNo;
+	
+	@Column(name="TREE_FLAG")
+	private String treeFlag;//如果标示为树，则生成单个实体的树
+	
+	public void validate(){
+		if(StringUtils.isEmpty(name)){
+			throw new MissException("1030");
+		}
+		if(name.length() > 50){
+			throw new MissException("1031");
+		}
+		if(remark!=null && remark.length() > 500){
+			throw new MissException("1032");
+		}
+		if(StringUtils.isEmpty(id)){
+			throw new MissException("1033");
+		}
+		if(id.length() > 50){
+			throw new MissException("1034");
+		}
+	}
 	
 	public String getId() {
 		return id;
@@ -75,14 +92,6 @@ public class LovGroup implements Serializable {
 		this.status = status;
 	}
 
-	public String getTreeFlag() {
-		return treeFlag;
-	}
-
-	public void setTreeFlag(String treeFlag) {
-		this.treeFlag = treeFlag;
-	}
-
 	public String getSystemFlag() {
 		return systemFlag;
 	}
@@ -99,12 +108,12 @@ public class LovGroup implements Serializable {
 		this.sortNo = sortNo;
 	}
 
-	public String getTableFlag() {
-		return tableFlag;
+	public String getTreeFlag() {
+		return treeFlag;
 	}
 
-	public void setTableFlag(String tableFlag) {
-		this.tableFlag = tableFlag;
+	public void setTreeFlag(String treeFlag) {
+		this.treeFlag = treeFlag;
 	}
 	
 }

@@ -22,17 +22,22 @@ public class ManyToManyDefinition implements Serializable{
 	@Column(name="ROW_ID")
 	private String id;
 	
+	@Column(name="CODE")
+	private String code;
+	
 	@Column(name="NAME")
 	private String name;
 	
 	@Column(name="REMARK")
 	private String remark;
 	
-	@Column(name="LEFT_GROUP_ID")
-	private String leftGroupId;
+	@Column(name="LEFT_ENTITY_DEFINITION_ID")
+	private String leftEntityDefinitionId;
 	
-	@Column(name="RIGHT_GROUP_ID")
-	private String rightGroupId;
+	@Column(name="RIGHT_ENTITY_DEFINITION_ID")
+	private String rightEntityDefinitionId;
+	
+	
 
 	public String getId() {
 		return id;
@@ -40,6 +45,14 @@ public class ManyToManyDefinition implements Serializable{
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getName() {
@@ -58,20 +71,20 @@ public class ManyToManyDefinition implements Serializable{
 		this.remark = remark;
 	}
 
-	public String getLeftGroupId() {
-		return leftGroupId;
+	public String getLeftEntityDefinitionId() {
+		return leftEntityDefinitionId;
 	}
 
-	public void setLeftGroupId(String leftGroupId) {
-		this.leftGroupId = leftGroupId;
+	public void setLeftEntityDefinitionId(String leftEntityDefinitionId) {
+		this.leftEntityDefinitionId = leftEntityDefinitionId;
 	}
 
-	public String getRightGroupId() {
-		return rightGroupId;
+	public String getRightEntityDefinitionId() {
+		return rightEntityDefinitionId;
 	}
 
-	public void setRightGroupId(String rightGroupId) {
-		this.rightGroupId = rightGroupId;
+	public void setRightEntityDefinitionId(String rightEntityDefinitionId) {
+		this.rightEntityDefinitionId = rightEntityDefinitionId;
 	}
 	
 }
