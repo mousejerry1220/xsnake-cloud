@@ -5,7 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.xsnake.web.permission.IUser;
+import org.xsnake.miss.api.permission.User;
 
 /** 
 * @author Jerry.Zhao 
@@ -37,12 +37,8 @@ public class SessionManager implements SessionSupport{
 		return request.getSession();
 	}
 	
-	public static IUser getLoginUser(){
-		return (IUser)getSession().getAttribute(LOGIN_USER);
-	}
-	
-	public static void setLoginUser(IUser user){
-		getSession().setAttribute(LOGIN_USER,user);
+	public static User getLoginUser(){
+		return (User)getSession().getAttribute(LOGIN_USER);
 	}
 	
 }

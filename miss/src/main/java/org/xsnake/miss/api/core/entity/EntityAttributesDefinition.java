@@ -1,4 +1,4 @@
-package org.xsnake.miss.api.lov.entity;
+package org.xsnake.miss.api.core.entity;
 
 import java.io.Serializable;
 
@@ -68,9 +68,6 @@ public class EntityAttributesDefinition implements Serializable{
 		}
 		if(StringUtils.isEmpty(type)){
 			throw new MissException("1022");
-		}
-		if(StringUtils.isEmpty(entityDefinitionId)){
-			throw new MissException("1023");
 		}
 		if(StringUtils.isEmpty(nullFlag)){
 			throw new MissException("1024");

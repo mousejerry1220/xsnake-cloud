@@ -1,4 +1,4 @@
-package org.xsnake.miss.api.lov.entity;
+package org.xsnake.miss.api.core.entity;
 
 import java.io.Serializable;
 
@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.util.StringUtils;
+import org.xsnake.miss.exception.MissException;
 
 
 @Entity
@@ -23,15 +25,24 @@ public class TreeDefinition implements Serializable{
 	@Column(name="ROW_ID")
 	private String id;
 	
-	@Column(name="NAME")
+	@Column(name="NAME",nullable=false)
 	private String name;
 	
 	@Column(name="REMARK")
 	private String remark;
 	
-	@Column(name="single_FLAG")
+	@Column(name="single_FLAG",nullable=false)
 	private String singleFlag;//是否单个实体组成的树
 
+	public void validate(){
+		if(StringUtils.isEmpty(name)){
+			throw new MissException("1040");
+		}
+		if(StringUtils.isEmpty(singleFlag)){
+			throw new MissException("1041");
+		}
+	}
+	
 	public String getId() {
 		return id;
 	}

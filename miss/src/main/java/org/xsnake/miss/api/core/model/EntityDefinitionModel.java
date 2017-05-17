@@ -1,10 +1,10 @@
-package org.xsnake.miss.api.lov.model;
+package org.xsnake.miss.api.core.model;
 
 import java.io.Serializable;
 import java.util.List;
 
-import org.xsnake.miss.api.lov.entity.EntityAttributesDefinition;
-import org.xsnake.miss.api.lov.entity.EntityDefinition;
+import org.xsnake.miss.api.core.entity.EntityAttributesDefinition;
+import org.xsnake.miss.api.core.entity.EntityDefinition;
 
 public class EntityDefinitionModel implements Serializable {
 

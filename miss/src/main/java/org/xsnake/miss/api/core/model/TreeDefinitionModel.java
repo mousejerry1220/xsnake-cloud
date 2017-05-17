@@ -1,12 +1,12 @@
-package org.xsnake.miss.api.lov.model;
+package org.xsnake.miss.api.core.model;
 
 import java.io.Serializable;
 import java.util.List;
 
-import org.xsnake.miss.api.lov.entity.TreeDefinition;
-import org.xsnake.miss.api.lov.entity.TreeMemberDefinition;
+import org.xsnake.miss.api.core.entity.TreeDefinition;
+import org.xsnake.miss.api.core.entity.TreeMemberDefinition;
 
-public class TreeModel implements Serializable{
+public class TreeDefinitionModel implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 

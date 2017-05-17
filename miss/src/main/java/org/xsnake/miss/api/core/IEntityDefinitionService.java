@@ -1,11 +1,12 @@
-package org.xsnake.miss.api.lov;
+package org.xsnake.miss.api.core;
 
 import java.util.List;
 
+import org.xsnake.dao.Condition;
 import org.xsnake.dao.IPage;
 import org.xsnake.dao.PageCondition;
-import org.xsnake.miss.api.lov.entity.EntityDefinition;
-import org.xsnake.miss.api.lov.model.EntityDefinitionModel;
+import org.xsnake.miss.api.core.entity.EntityDefinition;
+import org.xsnake.miss.api.core.model.EntityDefinitionModel;
 
 public interface IEntityDefinitionService {
 	
@@ -19,5 +20,5 @@ public interface IEntityDefinitionService {
 	
 	IPage query(PageCondition condition);
 	
-	List<EntityDefinition> list(PageCondition condition);
+	List<EntityDefinition> list(Condition condition);
 }

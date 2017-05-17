@@ -1,4 +1,4 @@
-package org.xsnake.miss.api.lov.entity;
+package org.xsnake.miss.api.core.entity;
 
 import java.io.Serializable;
 

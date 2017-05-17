@@ -1,4 +1,4 @@
-package org.xsnake.miss.api.lov.entity;
+package org.xsnake.miss.api.core.entity;
 
 import java.io.Serializable;
 
@@ -21,21 +21,27 @@ public class TreeNode implements Serializable{
 	@GenericGenerator(name="SYS_TREE_NODE_ID_GENERATOR", strategy="uuid")
 	@Column(name="ROW_ID")
 	private String id;
+
+	@Column(name="NODE_NAME")
+	private String nodeName;
+	
+	@Column(name="NODE_CODE")
+	private String nodeCode;
 	
 	@Column(name="NODE_ID")
 	private String nodeId;
 	
-	@Column(name="NODE_SOURCE")
-	private String nodeGroupId;
+	@Column(name="NODE_ENTITY_ID")
+	private String nodeEntityId;
 	
-	@Column(name="TREE_ID")
-	private String treeId;
+	@Column(name="TREE_DEFINITION_ID")
+	private String treeDefinitionId;
 	
 	@Column(name="PARENT_ID")
 	private String parentId;
 	
-	@Column(name="PARENT_SOURCE")
-	private String parentGroupId;
+	@Column(name="PARENT_ENTITY_ID")
+	private String parentEntityId;
 	
 	@Column(name="SORT_NO")
 	private Integer sortNo;
@@ -69,14 +75,6 @@ public class TreeNode implements Serializable{
 
 	public void setNodeId(String nodeId) {
 		this.nodeId = nodeId;
-	}
-
-	public String getTreeId() {
-		return treeId;
-	}
-
-	public void setTreeId(String treeId) {
-		this.treeId = treeId;
 	}
 
 	public Integer getSortNo() {
@@ -135,20 +133,44 @@ public class TreeNode implements Serializable{
 		this.idPath = idPath;
 	}
 
-	public String getNodeGroupId() {
-		return nodeGroupId;
+	public String getNodeEntityId() {
+		return nodeEntityId;
 	}
 
-	public void setNodeGroupId(String nodeGroupId) {
-		this.nodeGroupId = nodeGroupId;
+	public void setNodeEntityId(String nodeEntityId) {
+		this.nodeEntityId = nodeEntityId;
 	}
 
-	public String getParentGroupId() {
-		return parentGroupId;
+	public String getTreeDefinitionId() {
+		return treeDefinitionId;
 	}
 
-	public void setParentGroupId(String parentGroupId) {
-		this.parentGroupId = parentGroupId;
+	public void setTreeDefinitionId(String treeDefinitionId) {
+		this.treeDefinitionId = treeDefinitionId;
+	}
+
+	public String getParentEntityId() {
+		return parentEntityId;
+	}
+
+	public void setParentEntityId(String parentEntityId) {
+		this.parentEntityId = parentEntityId;
+	}
+
+	public String getNodeName() {
+		return nodeName;
+	}
+
+	public void setNodeName(String nodeName) {
+		this.nodeName = nodeName;
+	}
+
+	public String getNodeCode() {
+		return nodeCode;
+	}
+
+	public void setNodeCode(String nodeCode) {
+		this.nodeCode = nodeCode;
 	}
 	
 }
