@@ -29,8 +29,6 @@ import org.xsnake.web.common.BeanUtils;
 @Service
 @Transactional(readOnly = false, rollbackFor = Exception.class)
 public class EntityDefinitionServiceImpl implements IEntityDefinitionService {
-
-	public final static String TABLE_PREFIX = "BIZ_T";
 	
 	@Autowired
 	BaseDao baseDao;
@@ -77,7 +75,7 @@ public class EntityDefinitionServiceImpl implements IEntityDefinitionService {
 				baseDao.save(attr);
 			}
 			// 比对更新具体的表
-			tableDDLService.updateTable(TABLE_PREFIX+oldEntityDefinition.getId(), newAttributes, oldAttributes);
+			tableDDLService.updateTable(oldEntityDefinition.getId(), newAttributes, oldAttributes);
 		}
 	}
 	
@@ -107,7 +105,7 @@ public class EntityDefinitionServiceImpl implements IEntityDefinitionService {
 		}
 		
 		//创建数据库表
-		tableDDLService.createTable(TABLE_PREFIX + entityDefinition.getId(),entityDefinitionModel);
+		tableDDLService.createTable(entityDefinition.getId(),entityDefinitionModel);
 		
 		//如果是树，则生成树
 		if("Y".equals(entityDefinition.getTreeFlag())){
@@ -137,7 +135,7 @@ public class EntityDefinitionServiceImpl implements IEntityDefinitionService {
 		}
 		baseDao.executeHQL(" delete from EntityAttributesDefinition where entityDefinitionId = ? ",id);
 		baseDao.delete(entityDefinition);
-		baseDao.executeSQL("DROP TABLE "+TABLE_PREFIX+id );
+		baseDao.executeSQL("DROP TABLE "+id );
 		//TODO 查找many to many 与FK 关系的表
 	}
 

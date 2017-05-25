@@ -33,9 +33,6 @@ public class RelationEmployeePosition implements Serializable{
 	@Column(name="POSITION_ID")
 	private String positionId;
 	
-	@Column(name="MAIN_FLAG")
-	private String mainFlag;
-	
 	public String getId() {
 		return id;
 	}
@@ -58,14 +55,6 @@ public class RelationEmployeePosition implements Serializable{
 
 	public void setPositionId(String positionId) {
 		this.positionId = positionId;
-	}
-
-	public String getMainFlag() {
-		return mainFlag;
-	}
-
-	public void setMainFlag(String mainFlag) {
-		this.mainFlag = mainFlag;
 	}
 	
 }

@@ -33,14 +33,19 @@ public class PermissionServiceImpl implements IPermissionService{
 	
 	public User login(String userCode, String password) {
 		if(StringUtils.isEmpty(userCode ) || StringUtils.isEmpty(password)){
-			return null;
+			throw new MissException("账号密码不能为空");
 		}
 		//查找用户
-		Employee employee = baseDao.findUniqueEntity(" from Employee where code = ? and password = ? ");
+		Employee employee = baseDao.findUniqueEntity(" from Employee where code = ? ",new Object[]{userCode});
 		if(employee == null){
-			return null;
+			throw new MissException("账号不存在");
 		}
-		String positionId = employee.getLastPositionId();
+		
+		if(!password.equals(employee.getPassword())){
+			throw new MissException("密码错误");
+		}
+		
+		String positionId = employee.getLastPositionId() == null ? employee.getMainPositionId() : employee.getLastPositionId();
 		return loadUserInfo(employee, positionId);
 	}
 
@@ -48,10 +53,9 @@ public class PermissionServiceImpl implements IPermissionService{
 		//加载岗位
 		Position position = null;
 		if(positionId == null){
-			position = getMainPositionByEmployee(employee.getId());
-		}else{
-			position = baseDao.get(Position.class, positionId);
+			throw new MissException("用户未设置岗位");
 		}
+		position = baseDao.get(Position.class, positionId);
 		if(position == null){
 			throw new MissException("用户未设置岗位");
 		}
@@ -65,6 +69,10 @@ public class PermissionServiceImpl implements IPermissionService{
 		
 		//加载菜单
 		List<Menu> menu = findMenuList(employee.getId());
+
+		//记录用户最后登录的岗位
+		employee.setLastPositionId(positionId);
+		baseDao.update(employee);
 		
 		//构建用户
 		User user = new User(org,position,employee,permissionList,menu);
@@ -110,7 +118,7 @@ public class PermissionServiceImpl implements IPermissionService{
 		   .append(" RelationEmployeePosition rep ,")
 		   .append(" Position p ")
 	   .append(" where p.id = rep.positionId ")
-	   .append(" and rep.employeeId = ? and rep.mainFlag = 'Y' ");
+	   .append(" and rep.employeeId = ? ");
 		Position position = baseDao.findUniqueEntity(hql.toString(),employeeId);
 		return position;
 	}
@@ -131,6 +139,12 @@ public class PermissionServiceImpl implements IPermissionService{
 		return findPermissionListByEmployee(employeeId,false);
 	}
 	
+	/**
+	 * 通过员工获取到该用工的所有权限 
+	 * @param employeeId
+	 * @param isMenu
+	 * @return
+	 */
 	private List<Permission> findPermissionListByEmployee(String employeeId,boolean isMenu){
 		//岗位对应的权限
 		StringBuffer hql = new StringBuffer();
@@ -170,7 +184,7 @@ public class PermissionServiceImpl implements IPermissionService{
 	public User changePosition(String userId, String positionId) {
 		Employee employee = baseDao.get(Employee.class, userId);
 		if(employee == null){
-			return null;
+			throw new MissException("用户不存在");
 		}
 		return loadUserInfo(employee, positionId);
 	}

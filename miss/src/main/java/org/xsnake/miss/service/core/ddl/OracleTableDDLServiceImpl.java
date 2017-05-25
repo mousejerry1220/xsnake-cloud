@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.xsnake.dao.BaseDao;
 import org.xsnake.miss.api.core.entity.EntityAttributesDefinition;
 import org.xsnake.miss.api.core.model.EntityDefinitionModel;
@@ -19,6 +20,7 @@ import org.xsnake.miss.exception.MissException;
 * 
 */
 @Service
+@Transactional(readOnly=false,rollbackFor=Exception.class)
 public class OracleTableDDLServiceImpl implements ITableDDLService {
 
 	@Autowired

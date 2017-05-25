@@ -17,7 +17,7 @@ import org.xsnake.miss.exception.MissException;
 public class EntityDefinition implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(generator = "SYS_ENTITY_DEFINITION_ID_GENERATOR")
 	@GenericGenerator(name="SYS_ENTITY_DEFINITION_ID_GENERATOR", strategy="assigned")

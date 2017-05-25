@@ -61,20 +61,21 @@
 												${i18n['欢迎登陆']}
 											</h4>
 
-											<div class="space-6"></div>
-
-											<form>
+											<form method="post" id="frm_login" >
+												<h6>
+													<span class="red" id="frm_login_error"> &nbsp; </span>
+												</h6>
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="${i18n['用户名/邮箱']}" />
+															<input type="text" name="username" class="form-control" valid-required="不能为空" placeholder="${i18n['用户名/邮箱']}" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="${i18n['密码']}" />
+															<input type="password" name="password" valid-required="不能为空" class="form-control" placeholder="${i18n['密码']}" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
@@ -87,7 +88,7 @@
 															<span class="lbl">${i18n['自动登陆']}</span>
 														</label>
 
-														<button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+														<button type="button" class="width-35 pull-right btn btn-sm btn-primary submit">
 															<i class="ace-icon fa fa-key"></i>
 															<span class="bigger-110">${i18n['登录']}</span>
 														</button>
@@ -96,7 +97,6 @@
 													<div class="space-4"></div>
 												</fieldset>
 											</form>
-											
 										</div><!-- /.widget-main -->
 
 										<div class="toolbar clearfix">
@@ -255,12 +255,17 @@
 
 		<!--[if !IE]> -->
 		<script src="assets/js/jquery-2.1.4.min.js"></script>
-
+		
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script src="assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
+
+		<script src="assets/js/xsnake-miss.js"></script>
+		<script src="assets/js/jquery-form.min.js"></script>
+		<script src="assets/js/jquery.validate.min.js"></script>
+		
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
@@ -284,6 +289,17 @@
 				$('.widget-box.visible').removeClass('visible');//hide others
 				$(target).addClass('visible');//show target
 			 });
+			});
+			
+			$(function(){
+				$('#frm_login').postForm({
+					error:function(message){
+						$('#frm_login_error').html(message);
+					},
+					success:function(){
+						window.location.href="main.html";
+					}
+				});
 			});
 			
 			//you don't need this, just used for changing background

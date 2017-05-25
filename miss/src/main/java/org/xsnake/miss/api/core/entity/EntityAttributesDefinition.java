@@ -56,7 +56,7 @@ public class EntityAttributesDefinition implements Serializable{
 	private String defaultValue;
 	
 	//为数值类型提供
-	@Column(name="precision")
+	@Column(name="PRECISION")
 	private Integer precision;
 	
 	public void validate(){

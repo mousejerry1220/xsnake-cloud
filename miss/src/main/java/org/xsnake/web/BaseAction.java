@@ -5,6 +5,7 @@ import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -39,6 +40,18 @@ public abstract class BaseAction extends SessionManager implements AjaxSupport{
 			return "redirect:" + path;
 		}
 		return "redirect:" + path + SUFFIX;
+	}
+	
+	public HttpServletRequest getRequest(){
+		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+	}
+	
+	public void setAttribute(String key,Object value){
+		getRequest().setAttribute(key, value);
+	}
+
+	public void removeAttribute(String key){
+		getRequest().removeAttribute(key);
 	}
 	
 	public String sendSuccessMessage(Object result){

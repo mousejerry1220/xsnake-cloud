@@ -46,6 +46,9 @@ public class Employee implements Serializable{
 	@Column(name="LAST_POSITION_ID")
 	private String lastPositionId;
 	
+	@Column(name="MAIN_POSITION_ID")
+	private String mainPositionId;
+	
 	@Column(name="START_DATE")
 	private Date startDate;
 
@@ -106,6 +109,30 @@ public class Employee implements Serializable{
 
 	public void setLastPositionId(String lastPositionId) {
 		this.lastPositionId = lastPositionId;
+	}
+
+	public String getMainPositionId() {
+		return mainPositionId;
+	}
+
+	public void setMainPositionId(String mainPositionId) {
+		this.mainPositionId = mainPositionId;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 	
 }
