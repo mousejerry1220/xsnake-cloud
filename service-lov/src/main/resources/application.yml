@@ -2,7 +2,7 @@ spring:
   application:
     name: lov
 server:
-  port: 8082
+  port: 8088
 eureka:
   client:
     serviceUrl:

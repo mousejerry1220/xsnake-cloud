@@ -23,6 +23,8 @@ public class TreeForm {
 	String remark;
 	
 	Set<String> nodeSources;
+	
+	String fullFlag;
 
 	public String getCode() {
 		return code;
@@ -62,6 +64,14 @@ public class TreeForm {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getFullFlag() {
+		return fullFlag;
+	}
+
+	public void setFullFlag(String fullFlag) {
+		this.fullFlag = fullFlag;
 	}
 	
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.xsnake.cloud.common.business.IBaseService;
 import org.xsnake.cloud.common.dao.DaoTemplate;
 import org.xsnake.cloud.common.exception.BusinessException;
 import org.xsnake.cloud.common.search.IPage;
@@ -49,9 +48,6 @@ public class MemberServiceImpl implements IMemberService {
 	
 	@Autowired
 	ITreeService treeService;
-	
-	@Autowired
-	IBaseService baseService;
 	
 	public static final String BUSINESS_TYPE = "LOV_MEMBER";
 
@@ -150,7 +146,6 @@ public class MemberServiceImpl implements IMemberService {
 			}
 			treeService.addTreeNode(treeCode, id, form.getName(), form.getCode(), form.getGroupCode(), parentId);
 		}
-		baseService.recordSave(form.getId(), BUSINESS_TYPE, form);
 	}
 
 	private List<String> getTreeByGroupCode(String groupCode) {
@@ -169,7 +164,6 @@ public class MemberServiceImpl implements IMemberService {
 	public void delete(LovMemberForm form) {
 		Assert.notNull(form);
 		Assert.notNull(form.getId());
-		baseService.recordDelete(form.getId(), BUSINESS_TYPE, form);
 	}
 
 	@RequestMapping(value="/member/update",method=RequestMethod.POST)
@@ -184,6 +178,5 @@ public class MemberServiceImpl implements IMemberService {
 		for(String treeCode : list){
 			treeService.updateTreeNode(treeCode, form.getId(), form.getCode(), form.getName());
 		}
-		baseService.recordUpdate(form.getId(), BUSINESS_TYPE, form);
 	}
 }

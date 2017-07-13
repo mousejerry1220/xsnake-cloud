@@ -1,25 +1,18 @@
 package org.xsnake.cloud.common.form;
 
-import java.io.Serializable;
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidationException;
-import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 
-public class BaseForm implements Serializable{
+public class BaseForm extends ValidatorForm{
 	
 	private static final long serialVersionUID = 1L;
 	
-	@NotNull(message="operatorEmployeeId must not be null")
+	@NotNull(message="操作人不能为空")
 	protected String operatorEmployeeId;
 	
-	@NotNull(message="operatorPositionId must not be null")
+	@NotNull(message="操作人的岗位不能为空")
 	protected String operatorPositionId;
 	
-	@NotNull(message="operatorOrgId must not be null")
+	@NotNull(message="操作人的组织不能为空")
 	protected String operatorOrgId;
 
 	public String getOperatorEmployeeId() {
@@ -44,18 +37,6 @@ public class BaseForm implements Serializable{
 
 	public void setOperatorOrgId(String operatorOrgId) {
 		this.operatorOrgId = operatorOrgId;
-	}
-	
-	public void validate(){
-		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-		Set<ConstraintViolation<BaseForm>> errors = validator.validate(this);
-		if(errors.size() > 0){
-			StringBuffer message = new StringBuffer();
-			for(ConstraintViolation<BaseForm> error : errors ){
-				message.append(error.getMessage()).append(";");
-			}
-			throw new ValidationException(message.toString());
-		}
 	}
 	
 }

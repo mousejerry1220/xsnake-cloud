@@ -28,15 +28,10 @@ public class TreeServiceImpl implements ITreeService{
 	@Autowired
 	DaoTemplate daoTemplate;
 	
-	private final String SAVE_TREE_SQL = "insert into t_sys_lov_tree(code,name,systemFlag,version,remark) values ( ?, ?, ?, ?, ?) ";
-	
-	private final String SAVE_TREE_NODE_SOURCE_SQL = "insert into t_sys_lov_tree_node_source(treeCode,nodeSourceCode) values (?,?) ";
 	
 	private final String UPDATE_TREE_SQL = " update t_sys_lov_tree set name = ? ,remark = ? where code = ? ";
 	
 	private final String UPDATE_TREE_NODE_SQL = " update t_sys_lov_tree_node set name = ? , code = ?  where treeCode = ? and id = ? ";
-	
-	private final String INIT_TREE_SQL = " insert into t_sys_lov_tree_node (id,name,code,parentId,treeCode,level,idPath,namePath,codePath,nodeSourceCode) select m.id,m.name,m.code,NULL,?,1,concat('/',m.id),concat('/',m.name),concat('/',m.code),m.groupCode from t_sys_lov_member m left join t_sys_lov_tree_node tn on m.id = tn.id and tn.treeCode = ? where tn.id is null and m.groupCode = ? ";
 	
 	private final String GET_ALL_TREE_DATA_SQL = "select * from v_sys_lov_tree_node where treeCode = ? order by level,sn,code";
 	
@@ -54,22 +49,28 @@ public class TreeServiceImpl implements ITreeService{
 	public void save(TreeForm treeForm) {
 		Assert.notNull(treeForm);
 		//验证编码是否已经存在
-		String sql = "select count(1) from t_sys_lov_tree where code = ? ";
+		String sql = "select count(1) from t_bee_tree where code = ? ";
 		Long count = daoTemplate.queryLong(sql,treeForm.getCode());
 		if(count > 0){
 			throw new BusinessException("树编码已经存在 ：" + treeForm.getCode());
 		}
 		//插入树定义
+		String SAVE_TREE_SQL = "insert into t_bee_tree(code,name,systemFlag,version,remark,fullFlag) values ( ?, ?, ?, ?, ? , ? ) ";
 		daoTemplate.execute(SAVE_TREE_SQL, new Object[]{
 			treeForm.getCode(),
 			treeForm.getName(),
 			treeForm.getSystemFlag() == null ? "N" : treeForm.getSystemFlag(),
 			1,
-			treeForm.getRemark()
+			treeForm.getRemark(),
+			treeForm.getFullFlag()
 		});
+		
 		//插入树定义的来源和来源中的节点
 		for(String nodeSource : treeForm.getNodeSources()){
+			String SAVE_TREE_NODE_SOURCE_SQL = "insert into t_bee_tree_node_source(treeCode,nodeSourceCode) values (?,?) ";
 			daoTemplate.execute(SAVE_TREE_NODE_SOURCE_SQL,new Object[]{treeForm.getCode(),nodeSource});
+			
+			String INIT_TREE_SQL = "INSERT INTO t_bee_tree_node (id,NAME,CODE,parentId,treeCode,LEVEL,idPath,namePath,codePath,nodeSourceCode) SELECT m.id,m.name,m.code,NULL,?,1,CONCAT('/',m.id),CONCAT('/',m.name),CONCAT('/',m.code),m.groupCode FROM t_bee_data_simple m LEFT JOIN t_bee_tree_node tn ON m.id = tn.id AND tn.treeCode = ? WHERE tn.id IS NULL AND m.groupCode = ? ";
 			daoTemplate.execute(INIT_TREE_SQL,new Object[]{nodeSource,nodeSource,nodeSource});
 		}
 	}

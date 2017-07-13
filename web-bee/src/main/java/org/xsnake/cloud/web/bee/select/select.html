@@ -1,0 +1,70 @@
+<@pui.body>
+<div class="row">
+	<div class="col-xs-12">
+			<table id="grid-table"></table>
+			<div id="grid-pager"></div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function($) {
+	var bg = new BeeGrid({
+		caption:"选择",
+		grid:"#grid-table",
+		pager:"#grid-pager",
+		data:
+			[ 
+				{id:"asd1",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+				{id:"2sd",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+				{id:"sfd3",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"4f",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
+				{id:"5dfd",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
+				{id:"6sf",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"7sdf",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
+				{id:"gd8",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"9df",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"1sd0",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+				{id:"1gh1",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+				{id:"1d2",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"1sdf3",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
+				{id:"1sd4",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
+				{id:"1sd5",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"1s6",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
+				{id:"1df7",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"1fs8",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"1d9",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"20df",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+				{id:"2s1",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+				{id:"2sfg2",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"ssss",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"}
+			],
+		colModel:[
+			{name:'id',lable:'id', width:60, sorttype:"int", editable: false},
+			{name:'sdate',lable:'sdate',width:90, editable:true, edittype:"date",sorttype:"date"}, 
+			{name:'name',lable:'name', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}},
+			{name:'stock',lable:'stock', width:70, editable: true,edittype:"checkbox" },
+			{name:'ship',lable:'ship', width:90, editable: true,edittype:"select",editoptions:{value:"FedEx:FE;InTime:IN;TNT:TN;ARAMEX:AR"}},
+			{name:'note',lable:'note', width:150, sortable:false,editable: true,edittype:"textarea", editoptions:{rows:"2",cols:"10"}} 
+		],
+		cellEdit:false,
+		<#if multiple>
+			multiselect: true,
+		<#else>
+			multiselect: false,
+		</#if>
+	});
+	//从父页面获取初始化选中项
+	var initSelectedListFunction = parent["initSelectedListFunction_${callback}"]
+	var selectedList = initSelectedListFunction();
+	bg.setSelectedList(selectedList);
+	bg.init();
+	//回调函数返回页面中选中的数据，由父页面调用
+	window["callback"] = function(){
+		<#if multiple>
+			return bg.getSelectedList();
+		<#else>
+			return bg.getSelected();
+		</#if>
+	}
+});
+</script>
+</@pui.body>

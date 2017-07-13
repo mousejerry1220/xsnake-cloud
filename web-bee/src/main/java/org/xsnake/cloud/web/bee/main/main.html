@@ -1,0 +1,239 @@
+<@ui.body>
+
+<div id="hiddenView"></div>
+
+<button type="button" id="test" class="btn btn-primary btn-lg" >  
+    Launch demo modal 111111 
+</button> 
+
+<button type="button" id="test2" class="btn btn-primary btn-lg" >  
+    Launch demo modal 2222 
+</button>  
+<button type="button" class=" btn btn-white btn-primary"  disabled="disabled"  >None selected &nbsp;<b class="fa fa-reply"></b></button>
+<div id="test123"></div>
+<script type="text/javascript">
+
+$(function($) {
+	
+	window["hiddenView"] = $("#hiddenView");
+	
+	$("#test").beeChoice({
+		title:"标题",
+		src:"select",
+		callback:function(r){
+			console.info(r);
+		},
+		height:"300px",
+		multiple:true,
+		selectedList:[{id:'asd1'},{id:'5dfd'}]
+	});
+	
+	$("#test2").beeChoice({
+		title:"标题",
+		src:"select",
+		callback:function(r){
+			console.info(r);
+		},
+		height:"300px",
+		multiple:true,
+		selectedList:[{id:'asd1'}]
+	});
+})
+</script>
+
+	 <div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<div class="alert alert-info">
+				<button class="close" data-dismiss="alert">
+					<i class="ace-icon fa fa-times"></i>
+				</button>
+	
+				<i class="ace-icon fa fa-hand-o-right"></i>
+				Please note that demo server is not configured to save the changes, therefore you may see an error message.
+				<a href="#" onclick="$.addTab('aaaa','http://www.baidu.com')">aa</a>
+			</div>
+			<div class="row">
+				<table id="grid-table"></table>
+				<div id="grid-pager"></div>
+			</div>
+			
+			<div class="row">
+				<table id="grid-table2"></table>
+				<div id="grid-pager2"></div>
+			</div>
+			<!-- PAGE CONTENT ENDS -->
+		</div><!-- /.col -->
+	</div><!-- /.row -->
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+		
+		
+			var grid_data = 
+			[ 
+				{id:"asd1",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+				{id:"2sd",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+				{id:"sfd3",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"4f",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
+				{id:"5dfd",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
+				{id:"6sf",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"7sdf",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
+				{id:"gd8",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"9df",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"1sd0",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+				{id:"1gh1",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+				{id:"1d2",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"1sdf3",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
+				{id:"1sd4",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
+				{id:"1sd5",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"1s6",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
+				{id:"1df7",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"1fs8",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"1d9",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+				{id:"20df",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+				{id:"2s1",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+				{id:"2sfg2",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+				{id:"ssss",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"}
+			];
+			
+			var grid_data2 = 
+				[ 
+					{id:"1a",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+					{id:"2fd",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+					{id:"3fd",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+					{id:"a4",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
+					{id:"5sd",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
+					{id:"6as",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+					{id:"af7",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
+					{id:"a8a",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+					{id:"df9d",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+					{id:"1d0",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+					{id:"111",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+					{id:"1as2",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+					{id:"1asdf3",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
+					{id:"1adsf4",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
+					{id:"1asd5",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+					{id:"1e6",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
+					{id:"1ef7",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+					{id:"1sdg8",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+					{id:"1fhg9",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+					{id:"2jhg0",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+					{id:"2fd1",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+					{id:"2sd2",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+					{id:"2a3",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"}
+				];
+				
+			
+			$(function($) {
+				var bg = new BeeGrid({
+					caption:"aaaa",
+					grid:"#grid-table",
+					pager:"#grid-pager",
+					data: grid_data,
+					datatype: "json",
+					colModel:[
+						{name:'id',lable:'id', width:60, sorttype:"int", editable: false},
+						{name:'sdate',lable:'sdate22',width:90, editable:true, edittype:"date",sorttype:"date"}, 
+						{name:'name',lable:'name22', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}},
+						{name:'stock',lable:'stock', width:70, editable: true,edittype:"checkbox" },
+						{name:'ship',lable:'ship', width:90, editable: true,edittype:"select",editoptions:{value:"FedEx:FE;InTime:IN;TNT:TN;ARAMEX:AR"}},
+						{name:'note',lable:'note', width:150, sortable:false,editable: true,edittype:"textarea", editoptions:{rows:"2",cols:"10"}} 
+					], 
+					buttons:[{
+						id: "btn1",
+						name: "新增",
+						icon: "a",
+						handler:function(){
+							console.info(bg.getSelectedList());
+						}
+					},{
+						id:"btn2",
+						name:"修改",
+						icon: "a",
+						handler:function(){
+							console.info(bg.getChangeList());
+						}
+					},{
+						id:"btn3",
+						name:"修改",
+						icon: "a",
+						handler:function(){
+							bg.addRowData();
+						}
+					},{
+						id:"btn4",
+						name:"修改",
+						icon: "a",
+						handler:function(){
+							bg.delRowData();
+						}
+					},{
+						id:"btn5",
+						name:"修改",
+						icon: "a",
+						handler:function(){
+							bg.submitChange();
+						}
+					}]
+				});
+// 				bg.init();
+				
+				
+				var bg2 = new BeeGrid({
+					caption:"aaaa33",
+					grid:"#grid-table2",
+					pager:"#grid-pager2",
+					data: grid_data2,
+					multiselect: true,
+			        cellEdit:true,
+					colModel:[
+						{name:'id',label:'id', width:60, sorttype:"int", editable: false},
+						{name:'sdate',label:'sdate22',width:90, editable: true, edittype:"date",sorttype:"date"}, 
+						{name:'name',label:'name33', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}},
+						{name:'stock',label:'stock', width:70, editable: false,edittype:"checkbox" },
+						{name:'ship',label:'ship', width:90, editable: false,edittype:"select",editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
+						{name:'noteId',label:'noteId', width:60, editable: false},
+						{name:'note',label:'note', width:150, sortable:false,editable: true,edittype:"choice", editoptions:{idKey:"noteId"}} 
+					], 
+					buttons:[{
+						id: "btn1",
+						name: "新增",
+						icon: "a",
+						handler:function(){
+							console.info(bg2.getSelectedList());
+						}
+					},{
+						id:"btn2",
+						name:"修改",
+						icon: "a",
+						handler:function(){
+							console.info(bg2.getChangeList());
+						}
+					},{
+						id:"btn3",
+						name:"修改",
+						icon: "a",
+						handler:function(){
+							bg2.addRowData();
+						}
+					},{
+						id:"btn4",
+						name:"修改",
+						icon: "a",
+						handler:function(){
+							bg2.delRowData();
+						}
+					},{
+						id:"btn5",
+						name:"修改",
+						icon: "a",
+						handler:function(){
+							console.info(bg2.getSelected());
+						}
+					}]
+				});
+				bg2.init();
+				
+			});
+		</script>
+</@ui.body>

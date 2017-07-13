@@ -13,3 +13,5 @@ zuul:
     config.serviceId: config
     lov.path: /lov/**
     lov.serviceId: lov
+    org.path: /org/**
+    org.serviceId: org

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.xsnake.cloud.common.business.IBaseService;
 import org.xsnake.cloud.common.dao.DaoTemplate;
 import org.xsnake.cloud.common.exception.BusinessException;
 import org.xsnake.cloud.common.search.IPage;
@@ -37,13 +36,6 @@ public class GroupServiceImpl implements IGroupService{
 	@Autowired
 	ITreeService treeService;
 	
-	@Autowired
-	IBaseService baseService;
-	
-	private final String SAVE_GROUP_SQL = " insert into t_sys_lov_group(code,name,remark,systemFlag,treeFlag) values (?,?,?,?,?)";
-	
-	private final String CHECK_EXIST_GROUP_SQL = " select count(1) from t_sys_lov_group where code = ? ";
-	
 	private final String UPDATE_GROUP_SQL = " update t_sys_lov_group set name = ? , remark = ? where code = ? ";
 	
 	private final String GET_GROUP_SQL = " select * from v_sys_lov_group g where code = ? ";
@@ -58,19 +50,39 @@ public class GroupServiceImpl implements IGroupService{
 	public void save(@RequestBody LovGroupForm lovGroupForm) {
 		Assert.notNull(lovGroupForm, "LovGroupForm object must not be null");
 		lovGroupForm.validate();
+		
+		//验证主键是否重复
+		String CHECK_EXIST_GROUP_SQL = " select count(1) from t_sys_lov_group where code = ? ";
 		Long count = daoTemplate.queryLong(CHECK_EXIST_GROUP_SQL,lovGroupForm.getCode());
 		if(count > 0) {
 			throw new BusinessException("已经存在的编码：" + lovGroupForm.getCode());
 		}
+		
+		//验证表名是否存在
+		if(!StringUtils.isEmpty(lovGroupForm.getTableName())){
+			daoTemplate.query("select * from " + lovGroupForm.getTableName());
+		}
+		
+		//插入数据
+		String SAVE_GROUP_SQL = "INSERT INTO t_bee_group(code,name,remark,systemFlag,treeFlag,expandFlag,headerFlag,headerGroupCode,tableName,viewFlag,lockFlag,version,permissionType,permissionTreeCode) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		daoTemplate.execute(SAVE_GROUP_SQL,new Object[]{
 			lovGroupForm.getCode(),
 			lovGroupForm.getName(),
 			lovGroupForm.getRemark(),
-			"N",
-			lovGroupForm.getTreeFlag() == null ? "N" : lovGroupForm.getTreeFlag()
+			lovGroupForm.getSystemFlag(),
+			lovGroupForm.getTreeFlag(),
+			lovGroupForm.getExpandFlag(),
+			lovGroupForm.getHeaderFlag(),
+			lovGroupForm.getHeaderGroupCode(),
+			lovGroupForm.getTableName(),
+			lovGroupForm.getViewFlag(),
+			lovGroupForm.getLockFlag(),
+			lovGroupForm.getVersion(),
+			lovGroupForm.getPermissionType(),
+			lovGroupForm.getPermissionTreeCode()
 		});
-		baseService.recordSave(lovGroupForm.getCode(), BUSINESS_TYPE, lovGroupForm);
 		
+		//如果是树形结构，创建树
 		if("Y".equals(lovGroupForm.getTreeFlag())){
 			TreeForm treeForm = new TreeForm();
 			BeanUtils.copyProperties(lovGroupForm, treeForm);
@@ -97,7 +109,7 @@ public class GroupServiceImpl implements IGroupService{
 	@RequestMapping(value="/group/delete",method=RequestMethod.POST)
 	@Transactional(readOnly=false,rollbackFor=Exception.class)
 	public void delete(@RequestBody LovGroupForm form) {
-		baseService.recordDelete(form.getCode(), BUSINESS_TYPE, form);
+		throw new BusinessException("暂时不支持删除");
 	}
 	
 	@Override

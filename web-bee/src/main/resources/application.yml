@@ -1,0 +1,23 @@
+server:
+ port: 8081
+spring:
+  application:
+    name: web-bee
+  freemarker:
+    allow-request-override: false
+    cache: true
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    suffix: .html
+    template-loader-path: classpath:/
+    settings:
+      auto_import: /ui/ui.ftl as ui,/ui/pui.ftl as pui
+    request-context-attribute: ctx
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

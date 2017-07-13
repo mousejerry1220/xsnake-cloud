@@ -33,6 +33,12 @@
 		
 		<dependency>
 			<groupId>org.xsnake.cloud</groupId>
+			<artifactId>common-dao</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.xsnake.cloud</groupId>
 			<artifactId>service-lov-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
