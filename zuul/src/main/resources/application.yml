@@ -1,0 +1,15 @@
+server:
+ port: 8888
+spring:
+  application:
+   name: api-gateway
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes:
+    config.path: /config/**
+    config.serviceId: config
+    lov.path: /lov/**
+    lov.serviceId: lov
