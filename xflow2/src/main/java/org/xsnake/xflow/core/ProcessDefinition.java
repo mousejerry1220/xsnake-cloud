@@ -92,6 +92,10 @@ public class ProcessDefinition {
 		@SuppressWarnings("unchecked")
 		List<Element> list = root.elements("activity");
 		
+		if(list== null || list.size() == 0){
+			throw new DefinitionException("必须存在节点");
+		}
+		
 		/**
 		 * 实例定义中的节点并找出开始节点
 		 */
