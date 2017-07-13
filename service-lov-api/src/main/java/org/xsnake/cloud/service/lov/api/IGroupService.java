@@ -20,7 +20,7 @@ import org.xsnake.cloud.service.lov.api.entity.LovGroupForm;
 
 @FeignClient(name = "lov", configuration = FeignConfiguration.class)
 public interface IGroupService {
- 
+
 	@RequestMapping(value="/group/save",method=RequestMethod.POST)
 	void save(@RequestBody LovGroupForm lovGroupForm);
 	
